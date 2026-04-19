@@ -52,7 +52,7 @@ function defaultSession(tabId, demoMode = false) {
     scanInProgress: false,
     statusNote: demoMode
       ? "Scanning in demo mode. First verdict arrives in about 15 seconds."
-      : "Waiting to capture first clip.",
+      : "Waiting to capture the first frame sample.",
     clipsCaptured: 0,
     lastClipCapturedAt: null,
     pipeline: createPipelineState(demoMode),
@@ -253,7 +253,7 @@ function verdictCopy(scan) {
   if (scan?.noFaceDetected) {
     return {
       title: "No face detected",
-      subtitle: "We could not verify a visible face in the latest clip.",
+      subtitle: "We could not verify a visible face in the latest frame sample.",
       tone: "neutral"
     };
   }
@@ -274,7 +274,7 @@ function verdictCopy(scan) {
     case "likely_deepfake":
       return {
         title: "Likely deepfake",
-        subtitle: "The latest clip contains patterns consistent with synthesis artifacts.",
+        subtitle: "The latest frame sample contains patterns consistent with synthesis artifacts.",
         tone: "danger"
       };
     default:
@@ -491,8 +491,8 @@ function applyScanToSession(session, scan, statusNote = "") {
     uploadStage: session.demoMode ? "demo" : "complete",
     backendStage: session.demoMode ? "demo" : "responded",
     detail: scan.noFaceDetected
-      ? "Backend returned a result, but no face was detected in the clip."
-      : "Backend verdict received successfully.",
+      ? "The latest frame sample completed, but no visible face was detected."
+      : "Local verdict received successfully.",
     lastError: ""
   });
   pushDebugEvent(
@@ -1199,7 +1199,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             captureStage: "error",
             uploadStage: "idle",
             backendStage: "idle",
-            detail: "The tab capture stream ended before the next clip could finish.",
+            detail: "The tab capture stream ended before the next frame sample completed.",
             lastError: session.errorMessage
           });
           pushDebugEvent(
