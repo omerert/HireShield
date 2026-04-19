@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HireShield</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup-shell">
+      <section class="popup-hero">
+        <div class="popup-brand">
+          <div class="popup-mark">H</div>
+          <div>
+            <div class="popup-wordmark">HireShield</div>
+            <div class="popup-subtitle">On-device interview monitor</div>
+          </div>
+        </div>
+
+        <div class="popup-status-row">
+          <span class="popup-status-pill" id="statusPill">
+            <span class="popup-status-dot"></span>
+            <span id="statusLabel">Ready</span>
+          </span>
+          <span class="popup-platform" id="platformLabel">Checking page…</span>
+        </div>
+
+        <h1 id="headline">Stage-ready local detection</h1>
+        <p id="summary">
+          Capture the active tab, run the deepfake model locally, and surface a live trust score in the sidebar.
+        </p>
+      </section>
+
+      <section class="popup-card">
+        <div class="popup-detail">
+          <span>Current session</span>
+          <strong id="sessionStatus">Inactive</strong>
+        </div>
+        <div class="popup-detail">
+          <span>Scan target</span>
+          <strong id="scanTarget">On-device (Transformers.js)</strong>
+        </div>
+        <div class="popup-detail">
+          <span>Mode</span>
+          <strong id="modeSummary">Local inference</strong>
+        </div>
+      </section>
+
+      <button class="popup-primary" id="primaryButton">Start Monitoring</button>
+
+      <section class="popup-card popup-controls">
+        <label class="popup-toggle">
+          <div>
+            <span class="popup-toggle-title">Demo mode</span>
+            <span class="popup-toggle-copy">Replays staged verdicts instead of running the local model.</span>
+          </div>
+          <input type="checkbox" id="demoToggle" />
+          <span class="popup-switch"></span>
+        </label>
+
+        <button class="popup-link" id="openDashboard">Open local demo page</button>
+      </section>
+
+      <p class="popup-note" id="popupNote">
+        Live mode downloads the model once, caches it, and then runs fully on-device.
+      </p>
+
+      <footer class="popup-footer">v0.1 — built for hack.msa</footer>
+    </main>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HireShield Sidebar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="sidebar.css" />
+  </head>
+  <body>
+    <div class="hs-shell" id="shell">
+      <button class="hs-handle" id="toggleCollapse" aria-label="Collapse sidebar" type="button">
+        <span></span>
+      </button>
+
+      <aside class="hs-panel">
+        <div class="hs-backdrop"></div>
+
+        <header class="hs-header">
+          <div class="hs-brand">
+            <div class="hs-brand-mark">H</div>
+            <div>
+              <div class="hs-wordmark">HireShield</div>
+              <div class="hs-tagline">On-device interview monitor</div>
+            </div>
+          </div>
+
+          <div class="hs-status-pill is-idle" id="statusPill">
+            <span class="hs-status-dot"></span>
+            <span id="statusLabel">Idle</span>
+          </div>
+        </header>
+
+        <section class="hs-hero">
+          <div class="hs-ring-wrap">
+            <svg class="hs-ring" viewBox="0 0 160 160" aria-hidden="true">
+              <circle class="hs-ring-track" cx="80" cy="80" r="64"></circle>
+              <circle class="hs-ring-progress" id="scoreRing" cx="80" cy="80" r="64"></circle>
+            </svg>
+            <div class="hs-ring-center">
+              <div class="hs-score" id="scoreValue">--</div>
+              <div class="hs-score-caption" id="scoreCaption">Awaiting first scan</div>
+            </div>
+          </div>
+
+          <div class="hs-hero-copy">
+            <div class="hs-eyebrow">Live trust score</div>
+            <h1 class="hs-verdict" id="verdictText">Ready when you are</h1>
+            <p class="hs-subtext" id="verdictSubtext">
+              Start monitoring to run deepfake analysis on this tab.
+            </p>
+
+            <div class="hs-meta">
+              <span class="hs-meta-chip" id="lastUpdated">No scans yet</span>
+              <span class="hs-meta-chip" id="modeLabel">Local inference</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="hs-banner hidden" id="errorBanner"></section>
+
+        <section class="hs-card">
+          <div class="hs-section-head">
+            <h2>Recent scans</h2>
+            <div class="hs-section-actions">
+              <span class="hs-section-count" id="historyCount">0 / 5</span>
+              <button
+                type="button"
+                class="hs-reset-button"
+                id="resetHistory"
+                aria-label="Clear recent scans"
+                title="Clear recent scans"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+
+          <div class="hs-history" id="historyList">
+            <div class="hs-empty">No completed scans yet.</div>
+          </div>
+        </section>
+
+        <section class="hs-card hs-activity">
+          <button
+            type="button"
+            class="hs-activity-toggle"
+            id="activityToggle"
+            aria-expanded="false"
+          >
+            <span>
+              <strong>Activity</strong>
+              <em id="activitySummary">Idle</em>
+            </span>
+            <span class="hs-chevron" aria-hidden="true"></span>
+          </button>
+
+          <div class="hs-activity-body" id="activityBody" hidden>
+            <div class="hs-pipeline">
+              <div class="hs-stage">
+                <span class="hs-stage-dot is-idle" id="captureDot"></span>
+                <div class="hs-stage-copy">
+                  <strong>Capture</strong>
+                  <p id="captureStageText">Waiting to start</p>
+                </div>
+              </div>
+
+              <div class="hs-stage">
+                <span class="hs-stage-dot is-idle" id="uploadDot"></span>
+                <div class="hs-stage-copy">
+                  <strong>Frame</strong>
+                  <p id="uploadStageText">Waiting for capture</p>
+                </div>
+              </div>
+
+              <div class="hs-stage">
+                <span class="hs-stage-dot is-idle" id="backendDot"></span>
+                <div class="hs-stage-copy">
+                  <strong>Model</strong>
+                  <p id="backendStageText">Not loaded</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="hs-pipeline-note" id="pipelineDetail">
+              Waiting to start.
+            </div>
+
+            <div class="hs-activity-divider"></div>
+
+            <div class="hs-debug-head">
+              <h3>Runtime events</h3>
+              <span id="debugCount">0</span>
+            </div>
+            <div class="hs-debug-list" id="debugList">
+              <div class="hs-empty">No runtime events yet.</div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="hs-footer">
+          <button class="hs-button hs-button-primary" id="primaryAction" type="button">
+            Start monitoring
+          </button>
+          <button class="hs-button hs-button-secondary" id="endSession" type="button">
+            End session
+          </button>
+        </footer>
+      </aside>
+    </div>
+
+    <script type="module" src="sidebar.js"></script>
+  </body>
+</html>

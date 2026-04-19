@@ -1,0 +1,70 @@
+{
+  "manifest_version": 3,
+  "name": "HireShield",
+  "description": "Live on-device deepfake interview monitoring for Meet, Zoom, Teams, and local demo dashboards.",
+  "version": "0.2.0",
+  "permissions": [
+    "activeTab",
+    "tabCapture",
+    "storage",
+    "scripting",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "https://meet.google.com/*",
+    "https://*.zoom.us/*",
+    "https://teams.microsoft.com/*",
+    "https://www.youtube.com/*",
+    "https://youtube.com/*",
+    "http://localhost:3000/*",
+    "https://huggingface.co/*",
+    "https://*.huggingface.co/*",
+    "https://*.hf.co/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "HireShield",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://meet.google.com/*",
+        "https://*.zoom.us/*",
+        "https://teams.microsoft.com/*",
+        "https://www.youtube.com/*",
+        "https://youtube.com/*",
+        "http://localhost:3000/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "sidebar.html",
+        "sidebar.css",
+        "sidebar.js",
+        "demo-data.js",
+        "vendor/transformers/*"
+      ],
+      "matches": [
+        "https://meet.google.com/*",
+        "https://*.zoom.us/*",
+        "https://teams.microsoft.com/*",
+        "https://www.youtube.com/*",
+        "https://youtube.com/*",
+        "http://localhost:3000/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' blob: data: https://huggingface.co https://*.huggingface.co https://*.hf.co; img-src 'self' blob: data:;"
+  }
+}
